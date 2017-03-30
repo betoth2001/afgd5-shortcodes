@@ -24,7 +24,8 @@ function afgd5sh_cpw_title_addtocalendar(){
 * @author bet
 */
 function afgd5sh_url_shortcode() {
-	return get_bloginfo('url').'/';
+	#return get_bloginfo('url').'/';#deprecated
+  return network_home_url().'/';	
 }
 
 // Register style sheet.
