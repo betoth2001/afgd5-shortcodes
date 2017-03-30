@@ -50,7 +50,7 @@ function afgd5sh_closed_meeting_footer_text($flag) {
 /**
 * Get site url for links
 *
-* @author Bryan T <bet6556@gmail.com>
+* @author Bryan T <bet6556@gmail.com> 
 */
 
 add_shortcode('url','afgd5sh_url_shortcode');
