@@ -9,6 +9,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Function Prefix: afgd5sh_
 */
 
+defined( 'ABSPATH' ) or die( 'AFGD5sh No script please!' );
+
 /** 
  * add addToCalendar button to title in "category posts widget"
  */
