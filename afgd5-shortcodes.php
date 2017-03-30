@@ -77,7 +77,7 @@ function afgd5sh_addtocalbutton($atts = [], $content = null, $tag = '') {
   }
   
   ob_start(); //capture output to buffer
-  require(locate_template('addtocalendarbutton.php'));
+  require(plugin_dir_path( __FILE__ ).'addtocalendarbutton.php');
   return $output . ob_get_clean();
 }
 
