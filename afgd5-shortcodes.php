@@ -25,11 +25,40 @@ function afgd5sh_open_meeting_footer_text() {
   return "OPEN: This meeting is open to the public and welcomes everyone interested in Al-Anon/Alateen, including those who wish to observe as a student or professional.";
 }
 add_shortcode('closed','afgd5sh_closed_shortcode');
+if (!function_exists('normalize_empty_atts')) {
+  function normalize_empty_atts ($atts) {
+    if( is_array($atts) ) {
+      foreach ($atts as $attribute => $value) {
+        if (is_int($attribute)) {
+          $atts[strtolower($value)] = true;
+          unset($atts[$attribute]);
+        }
+      }
+    }
+    return $atts;
+  }
+}
 function afgd5sh_closed_shortcode($atts = [], $content = '', $tag = '') {
+  #WP removes enclosing p elements around shortcode in post content, so have to manually add where needed, which is triggered by including "p" inside shortcode, i.e., [closed p]
+  $short_atts = shortcode_atts([
+    'p' => false,
+    'div' => false,
+  ], normalize_empty_atts($atts), $tag);
+  
+  $pretags = '';
+  $appendtags = '';
+  if( $short_atts['div'] ){
+    $pretags .= "<div>";
+    $appendtags .= "</div>";
+  }
+  if( $short_atts['p'] ){
+    $pretags .= "<p>";
+    $appendtags .= "</p>";
+  }
   if( '' === $content ){
-    return afgd5sh_closed_meeting_footer_text(false);
+    return $pretags.afgd5sh_closed_meeting_footer_text(false).$appendtags;
   } 
-  return afgd5sh_closed_meeting_footer_text(true);
+  return $pretags.afgd5sh_closed_meeting_footer_text(true).$appendtags;
 }
 function afgd5sh_closed_meeting_footer_text($flag) {
   $desc_str = '';
