@@ -17,6 +17,8 @@ function afgd5sh_announcements( $query ) {
     return;
   
   if ( $query->is_category('announcement') ){
+    if ( ! isset($_GET["order"]) )
+      $query->set("order", "ASC");
     $query->set("orderby",'meta_value_num');
     $query->set('meta_key', 'start_date');
     $meta_q = $query->get('meta_query');
