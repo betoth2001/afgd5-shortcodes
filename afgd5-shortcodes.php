@@ -11,6 +11,41 @@ Function Prefix: afgd5sh_
 
 defined( 'ABSPATH' ) or die( 'AFGD5sh No script please!' );
 
+add_action( 'pre_get_posts',__NAMESPACE__.'\afgd5sh_announcements');
+function afgd5sh_announcements( $query ) {
+  if ( is_admin() )
+    return;
+  
+  if ( $query->is_category('announcement') ){
+    $query->set("orderby",'meta_value_num');
+    $query->set('meta_key', 'start_date');
+    $meta_q = $query->get('meta_query');
+    if( ! is_array($meta_q) )
+      $meta_q = array();
+    
+    $date_now = strtotime(date('Y-m-d H:i:s'));
+    
+    if ( $query->get("order") == "ASC" ){
+      $comp_str = '>=';
+    } else {
+      $comp_str = '<';
+    }
+    $query->set('meta_query',
+      array_merge($meta_q,
+        array(
+          'relation' => 'AND',
+          array(
+				        'key' => 'end_date',
+				        'compare' => $comp_str,
+				        'type' => 'NUMERIC',
+				        'value' => $date_now,
+				  ),
+        )
+      )
+    );
+  }  
+}
+
 add_action('wp_head', 'google_devoloper_meta');
 function google_devoloper_meta(){
   /* Place this in page header for site verification by Google
