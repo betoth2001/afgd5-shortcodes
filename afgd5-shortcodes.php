@@ -35,11 +35,11 @@ function afgd5sh_announcements( $query ) {
         array(
           'relation' => 'AND',
           array(
-				        'key' => 'end_date',
-				        'compare' => $comp_str,
-				        'type' => 'NUMERIC',
-				        'value' => $date_now,
-				  ),
+                'key' => 'end_date',
+                'compare' => $comp_str,
+                'type' => 'NUMERIC',
+                'value' => $date_now,
+          ),
         )
       )
     );
@@ -135,7 +135,7 @@ function afgd5sh_closed_meeting_footer_text($flag) {
 
 add_shortcode('url','afgd5sh_url_shortcode');
 function afgd5sh_url_shortcode() {
-	return get_bloginfo('url').'/';
+  return get_bloginfo('url').'/';
 }
 
 
