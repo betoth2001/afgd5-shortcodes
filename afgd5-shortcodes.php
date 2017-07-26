@@ -45,7 +45,7 @@ function afgd5sh_announcements( $query ) {
         )
       )
     );
-  } else {
+  } elseif( $query->is_category() ) {
     if ( ! isset($_GET["order"]) )
       $query->set("order", "DES");
     $query->set("orderby",'meta_value_num');
