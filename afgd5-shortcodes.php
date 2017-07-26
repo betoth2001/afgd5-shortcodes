@@ -45,7 +45,12 @@ function afgd5sh_announcements( $query ) {
         )
       )
     );
-  }  
+  } else {
+    if ( ! isset($_GET["order"]) )
+      $query->set("order", "DES");
+    $query->set("orderby",'meta_value_num');
+    $query->set('meta_key', 'start_date');
+  }
 }
 
 add_action('wp_head', 'google_devoloper_meta');
