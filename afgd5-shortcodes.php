@@ -69,14 +69,15 @@ function afgd5sh_open_meeting_footer_text($atts = [], $content = '', $tag = '') 
     'div' => false,
   ], normalize_empty_atts($atts), $tag);
   
+  $css_class = ' class="welcome-open"';
   $pretags = '';
   $appendtags = '';
   if( $short_atts['div'] ){
-    $pretags .= "<div>";
+    $pretags .= '<div'.$css_class.'>';
     $appendtags .= "</div>";
   }
   if( $short_atts['p'] ){
-    $pretags .= "<p>";
+    $pretags .= '<p'.$css_class.'>';
     $appendtags .= "</p>";
   }
 #  return "OPEN: This meeting welcomes everyone including those who are interested in Al-Anon/Alateen or wish to observe as a student or professional.";
@@ -103,14 +104,15 @@ function afgd5sh_closed_shortcode($atts = [], $content = '', $tag = '') {
     'div' => false,
   ], normalize_empty_atts($atts), $tag);
   
+  $css_class = ' class="welcome-closed"';
   $pretags = '';
   $appendtags = '';
   if( $short_atts['div'] ){
-    $pretags .= "<div>";
+    $pretags .= '<div'.$css_class.'>';
     $appendtags .= "</div>";
   }
   if( $short_atts['p'] ){
-    $pretags .= "<p>";
+    $pretags .= '<p'.$css_class.'>';
     $appendtags .= "</p>";
   }
   if( '' === $content ){
