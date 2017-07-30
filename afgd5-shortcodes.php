@@ -81,7 +81,9 @@ function afgd5sh_open_meeting_footer_text($atts = [], $content = '', $tag = '') 
     $appendtags .= "</p>";
   }
 #  return "OPEN: This meeting welcomes everyone including those who are interested in Al-Anon/Alateen or wish to observe as a student or professional.";
-  return $pretags."OPEN: This meeting is open to the public and welcomes everyone interested in Al-Anon/Alateen, including those who wish to observe as a student or professional.".$appendtags;
+  $msg = $pretags."OPEN: This meeting is open to the public and welcomes everyone interested in Al-Anon/Alateen, including those who wish to observe as a student or professional.".$appendtags;
+  $msg = apply_filters('afgd5sh_open',$msg, $short_atts);
+  return $msg;
 }
 add_shortcode('closed','afgd5sh_closed_shortcode');
 if (!function_exists('normalize_empty_atts')) {
@@ -116,10 +118,14 @@ function afgd5sh_closed_shortcode($atts = [], $content = '', $tag = '') {
     $appendtags .= "</p>";
   }
   if( '' === $content ){
-    return $pretags.afgd5sh_closed_meeting_footer_text(false).$appendtags;
-  } 
-  return $pretags.afgd5sh_closed_meeting_footer_text(true).$appendtags;
+    $msg = $pretags.afgd5sh_closed_meeting_footer_text(false).$appendtags;
+  } else {
+    $msg = $pretags.afgd5sh_closed_meeting_footer_text(true).$appendtags;
+  }
+  $msg = apply_filters('afgd5sh_closed',$msg, $short_atts);
+  return $msg;
 }
+
 function afgd5sh_closed_meeting_footer_text($flag) {
   $desc_str = '';
   $desc_str .= "CLOSED: This meeting of ";
